@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floraora - සුවඳවත් මල් පාරාදීසය</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+Sinhala:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #ff4a7d;
+            --secondary-color: #f8bbd0;
+            --dark-color: #2c3e50;
+            --light-bg: #fff5f7;
+            --grad: linear-gradient(135deg, #ff4a7d 0%, #e91e63 100%);
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Sinhala', sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            color: var(--dark-color);
+        }
+
+        /* Header එක ලස්සන කිරීම */
+        header {
+            background: var(--grad);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.2);
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -20px auto 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Form එක නවීන පන්නයට සකස් කිරීම */
+        .form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .form-section h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            align-items: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 74, 125, 0.2);
+        }
+
+        button {
+            background: var(--grad);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        /* මල් පෙන්වන Grid එක */
+        .section-title {
+            font-size: 1.6rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .flower-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* Premium Card Design එක */
+        .flower-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 74, 125, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px 20px;
+            position: relative;
+        }
+
+        .flower-card::before {
+            content: '🌸';
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .flower-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(255, 74, 125, 0.1);
+        }
+
+        .flower-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .flower-price {
+            background: #fff0f3;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .flower-qty {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            background: #f8f9fa;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .loading {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #95a5a6;
+            padding: 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌸 FLORAORA 🌸</h1>
+    <p>නැවුම් සහ සිත්ගන්නාසුලු මල් එකතුව</p>
+</header>
+
+<div class="container">
+    <div class="form-section">
+        <h3>➕ නව මල් වර්ගයක් එකතු කරන්න</h3>
+        <form id="flower-form">
+            <div class="form-grid">
+                <input type="text" id="name" placeholder="මලේ නම (e.g. රතු රෝස)" required>
+                <input type="number" id="price" placeholder="මිල (රුපියල්)" required>
+                <input type="number" id="qty" placeholder="ප්‍රමාණය (තොග)" required>
+                <button type="submit">සුරකින්න</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="section-title">අපේ වත්මන් මල් තොගය</div>
+    <div id="flower-list" class="flower-grid">
+        <p class="loading">මල් ලැයිස්තුව සූදානම් වෙමින් පවතී...</p>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
