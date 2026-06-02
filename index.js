@@ -55,6 +55,6 @@ app.post('/api/flowers', async (req, res) => {
 
 // Server එක පණ ගැන්වීම
 app.listen(PORT, () => {
-    console.log(`Server එක http://localhost:${PORT} ඔස්සේ වැඩ කරමින් පවතී...`);
+    console.log(`Server එක http://localhost:$5000{PORT} ඔස්සේ වැඩ කරමින් පවතී...`);
     module.exports = app;
 });
