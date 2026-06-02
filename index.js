@@ -58,3 +58,6 @@ app.listen(PORT, () => {
     console.log(`Server එක http://localhost:$5000{PORT} ඔස්සේ වැඩ කරමින් පවතී...`);
     module.exports = app;
 });
+    module.exports = app;
+
+
