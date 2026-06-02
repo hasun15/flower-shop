@@ -3,22 +3,20 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
 app.use(cors());
 
-// 🔴 වැදගත්: <db_password> කියන කෑල්ල වෙනුවට ඔයා admin යූසර්ට දුන්න සැබෑ Password එක ටයිප් කරන්න!
-// (රීතී ලකුණු < > දෙකත් අයින් කරන්න මතක තියාගන්න)
-const MONGO_URI = 'mongodb+srv://admin:pass123@cluster0.b9cwwib.mongodb.net/mal_shop?retryWrites=true&w=majority&appName=Cluster0';
+// MongoDB Database එකට සම්බන්ධ වීම (Vercel එකේ තියෙන ලින්ක් එක හෝ කෝඩ් එකේ ලින්ක් එක ගනී)
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://admin:pass123@cluster0.b9cwwib.mongodb.net/mal_shop?retryWrites=true&w=majority&appName=Cluster0';
 
-// MongoDB Database එකට සම්බන්ධ වීම
 mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Database එකට සාර්ථකව සම්බන්ධ වුණා! ✅'))
     .catch(err => console.error('Database එකට සම්බන්ධ වෙන්න බැරි වුණා ❌:', err));
 
-// Database Schema (මල් වල හැඩය සැලසුම් කිරීම)
+// Database Schema
 const flowerSchema = new mongoose.Schema({
     name: { type: String, required: true },
     price: { type: Number, required: true },
@@ -26,6 +24,11 @@ const flowerSchema = new mongoose.Schema({
 });
 
 const Flower = mongoose.model('Flower', flowerSchema);
+
+// Base Route (Vercel එක වැඩද බලන්න පොඩි Welcome මැසේජ් එකක්)
+app.get('/', (req, res) => {
+    res.send('මල් කඩේ Backend API එක සාර්ථකව වැඩ කරයි! 🌸');
+});
 
 // 1. GET Route - Database එකේ තියෙන ඔක්කොම මල් ටික ලබාගැනීම
 app.get('/api/flowers', async (req, res) => {
@@ -37,7 +40,7 @@ app.get('/api/flowers', async (req, res) => {
     }
 });
 
-// 2. POST Route - අලුත් මලක් සැබෑ Database එකටම සේව් කිරීම
+// 2. POST Route - අලුත් මලක් Database එකට සේව් කිරීම
 app.post('/api/flowers', async (req, res) => {
     try {
         const newFlower = new Flower({
@@ -53,11 +56,12 @@ app.post('/api/flowers', async (req, res) => {
     }
 });
 
-// Server එක පණ ගැන්වීම
-app.listen(PORT, () => {
-    console.log(`Server එක http://localhost:$5000{PORT} ඔස්සේ වැඩ කරමින් පවතී...`);
-    module.exports = app;
-});
-    module.exports = app;
+// Local පරිගණකයේදී විතරක් Server එක Run වීමට
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server එක http://localhost:${PORT} ඔස්සේ වැඩ කරමින් පවතී...`);
+    });
+}
 
-
+// 🟢 Vercel එකට අත්‍යවශ්‍යම Export එක (app.listen එකෙන් පිටත)
+module.exports = app;
